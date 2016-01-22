@@ -1,3 +1,17 @@
+/*
+Copyright 2016 Claire Tang
+
+Pomodoro app for the Particle Photon InternetButton
+
+To start a session, press the bottom button (#2).
+Tomato red LEDs count down each session, and when
+the session is over, a rainbow and tune plays.
+Press the top button (#0) while the session is going
+to switch into distraction-free mode.
+Finally, track your sessions completed by pressing
+the right button (#1).
+*/
+
 #include "application.h"
 #include "BetterPhotonButton.h"
 
@@ -6,7 +20,8 @@
 #define POMO_TIMER 3
 #define POMO_START 2
 
-#define POMO_DURATION 60*1000*1
+#define POMO_DURATION 60*1000*1 //duration of each session in ms.
+                                //POMO_DURATION must be greater than RAINBOW_DURATION
 #define RAINBOW_DURATION 2000
 
 BetterPhotonButton bb = BetterPhotonButton();
@@ -85,8 +100,6 @@ void buttonPressedHandler(int button, bool state){
       break;
   }
 }
-
-bool started_rainbow = false;
 
 void setup() {
   bb.setup();
